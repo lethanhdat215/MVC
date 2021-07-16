@@ -18,7 +18,7 @@ public class checkEmail {
 //    public ModelAndView homePage(){
 //        ModelAndView modelAndView = new ModelAndView("hello");
 //        return  modelAndView;
-//    }
+//    .}
 
     @GetMapping("/getall")
     public String helloController(Model model, @RequestParam("txtcheckemail") String email) {
