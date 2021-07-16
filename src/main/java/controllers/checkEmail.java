@@ -19,7 +19,7 @@ public class checkEmail {
 //        ModelAndView modelAndView = new ModelAndView("hello");
 //        return  modelAndView;
 //    .}
-
+//hjghgj
     @GetMapping("/getall")
     public String helloController(Model model, @RequestParam("txtcheckemail") String email) {
         String ketqua;
