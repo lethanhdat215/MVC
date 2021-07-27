@@ -28,10 +28,15 @@
                 <td>Blog Text</td>
                 <td><form:input path="blogText"></form:input></td>
             </tr>
+<%--            <tr>--%>
+<%--                <td>Blog Date</td>--%>
+<%--                <td><form:input path="blogDate"></form:input></td>--%>
+<%--            </tr>--%>
             <tr>
                 <td colspan="2"><input type="submit" value="Create"></td>
             </tr>
         </table>
     </form:form>
+    <a href="/blogController/getAll.htm"><button>Back Blog</button></a>
 </body>
 </html>

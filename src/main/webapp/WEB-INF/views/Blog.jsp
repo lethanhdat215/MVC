@@ -20,6 +20,7 @@
     <th style="background: darkgreen">Blog Id</th>
     <th style="background: red">Blog Name</th>
     <th style="background: purple">Blog Text</th>
+    <th style="background: purple">Blog Date</th>
     <th style="background: yellow">Functions</th>
     </thead>
     <tbody>
@@ -28,9 +29,11 @@
             <td style="background: lightblue ">${blog.blogId}</td>
             <td style="background: lightblue">${blog.blogName}</td>
             <td style="background: lightblue">${blog.blogText}</td>
+            <td style="background: lightblue">${blog.blogDate}</td>
             <td>
                 <a href="initUpdate.htm?blogId=${blog.blogId}"><button style="background: aqua">Update Blog</button></a>
                 <a href="delete.htm?blogId=${blog.blogId}"><button style="background: chartreuse"> Delete Blog</button></a>
+                <a href="initShow.htm?blogId=${blog.blogId}"><button style="background: chartreuse"> Show Blog</button></a>
             </td>
         </tr>
     </c:forEach>

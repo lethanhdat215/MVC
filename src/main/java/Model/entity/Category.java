@@ -13,17 +13,18 @@ import java.util.Calendar;
 
 @Entity
 @Data // thay cho getter setter constructor
-@Table(name = "Blog")
-public class Blog {
+@Table(name = "Category")
+public class Category {
     @Id
+    @Column(name = "categoryId")
+    private int categoryId;
+    @Column(name = "categoryName")
+    private String categoryName;
     @Column(name = "id")
     private int blogId;
-    @Column(name = "name")
-    private String blogName;
-    @Column(name = "context")
-    private String blogText;
-    @Column(name = "created")
-    private Timestamp blogDate;
+
+
+
 
 
 

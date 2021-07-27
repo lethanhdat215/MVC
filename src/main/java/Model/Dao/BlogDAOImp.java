@@ -6,13 +6,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class BlogDAOImp implements BlogDAO {
+public class BlogDAOImp implements BlogDAO{
     @Autowired
     private SessionFactory sessionFactory;
+
     public List<Blog> finAll() {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -48,10 +48,9 @@ public class BlogDAOImp implements BlogDAO {
             session.merge(blog);
             session.getTransaction().commit();
             check = true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            check = false;
-        }finally {
+        } finally {
             session.close();
         }
         return check;
@@ -64,15 +63,15 @@ public class BlogDAOImp implements BlogDAO {
             session = sessionFactory.openSession();
             session.getTransaction().begin();
             Blog blogDelete = findById(blogId);
-            if (blogDelete != null){
+            if (blogDelete != null) {
                 session.delete(blogDelete);
             }
             session.getTransaction().commit();
             check = true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
-        }finally {
+        } finally {
             session.close();
         }
         return check;
@@ -81,7 +80,7 @@ public class BlogDAOImp implements BlogDAO {
     public Blog findById(int blogId) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        Blog blog = (Blog) session.createQuery("from Blog where blogId = :blogId").setParameter("blogId",blogId).uniqueResult();
+        Blog blog = (Blog) session.createQuery("from Blog where blogId = :blogId").setParameter("blogId", blogId).uniqueResult();
         session.getTransaction().commit();
         session.close();
         return blog;

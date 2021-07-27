@@ -29,6 +29,10 @@
             <td>Blog Text</td>
             <td><form:input path="blogText"></form:input></td>
         </tr>
+<%--        <tr>--%>
+<%--            <td>Blog Text</td>--%>
+<%--            <td><form:input path="blogDate"></form:input></td>--%>
+<%--        </tr>--%>
         <tr>
             <td colspan="2"><input type="submit" value="Update"></td>
         </tr>
