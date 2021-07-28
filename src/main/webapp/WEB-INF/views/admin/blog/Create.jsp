@@ -9,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Create Blog</title>
@@ -28,6 +29,22 @@
                 <td>Blog Text</td>
                 <td><form:input path="blogText"></form:input></td>
             </tr>
+            <tr>
+                <td>Category Name</td>
+                <td>
+                    <form:select path="category.categoryId">
+                        <c:forEach items="${listCategory}" var="listCategory">
+                            <form:option value="${listCategory.categoryId}">${listCategory.categoryName}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </td>
+            </tr>
+
+<%--            <tr>--%>
+<%--                <td>Category Id</td>--%>
+<%--                <td><form:input path="category.categoryId"></form:input></td>--%>
+<%--            </tr>--%>
+
 <%--            <tr>--%>
 <%--                <td>Blog Date</td>--%>
 <%--                <td><form:input path="blogDate"></form:input></td>--%>

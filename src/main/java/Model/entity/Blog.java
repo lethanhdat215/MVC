@@ -2,10 +2,7 @@ package Model.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -24,14 +21,21 @@ public class Blog {
     private String blogText;
     @Column(name = "created")
     private Timestamp blogDate;
+//    @Column(name = "categoryId")
+//    private int categoryId;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId" )
+    private Category category;
 
-
-   /* public Blog(int blogId, String blogName, String blogText, Date blogDate) {
+    public Blog(int blogId, String blogName, String blogText, Timestamp blogDate, int categoryId, Category category) {
         this.blogId = blogId;
         this.blogName = blogName;
         this.blogText = blogText;
         this.blogDate = blogDate;
+//        this.categoryId = categoryId;
+
+        this.category = category;
     }
 
     public Blog() {
@@ -62,11 +66,27 @@ public class Blog {
         this.blogText = blogText;
     }
 
-    public Date getBlogDate() {
+    public Timestamp getBlogDate() {
         return blogDate;
     }
 
-    public void setBlogDate(Date blogDate) {
+    public void setBlogDate(Timestamp blogDate) {
         this.blogDate = blogDate;
-    }*/
+    }
+
+//    public int getCategoryId() {
+//        return categoryId;
+//    }
+//
+//    public void setCategoryId(int categoryId) {
+//        this.categoryId = categoryId;
+//    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

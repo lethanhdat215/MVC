@@ -2,14 +2,12 @@ package Model.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 @Entity
 @Data // thay cho getter setter constructor
@@ -20,54 +18,53 @@ public class Category {
     private int categoryId;
     @Column(name = "categoryName")
     private String categoryName;
-    @Column(name = "id")
-    private int blogId;
+//    @Column(name = "id")
+//    private int blogId;
 
+    @OneToMany()
+    private List<Blog> listBlog;
 
+    public Category(int categoryId, String categoryName, int blogId, List<Blog> listBlog) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+//        this.blogId = blogId;
 
-
-
-
-   /* public Blog(int blogId, String blogName, String blogText, Date blogDate) {
-        this.blogId = blogId;
-        this.blogName = blogName;
-        this.blogText = blogText;
-        this.blogDate = blogDate;
+        this.listBlog = listBlog;
     }
 
-    public Blog() {
+    public Category() {
 
     }
 
-    public int getBlogId() {
-        return blogId;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setBlogId(int blogId) {
-        this.blogId = blogId;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public String getBlogName() {
-        return blogName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setBlogName(String blogName) {
-        this.blogName = blogName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public String getBlogText() {
-        return blogText;
+//    public int getBlogId() {
+//        return blogId;
+//    }
+//
+//    public void setBlogId(int blogId) {
+//        this.blogId = blogId;
+//    }
+
+    public List<Blog> getListBlog() {
+        return listBlog;
     }
 
-    public void setBlogText(String blogText) {
-        this.blogText = blogText;
+    public void setListBlog(List<Blog> listBlog) {
+        this.listBlog = listBlog;
     }
-
-    public Date getBlogDate() {
-        return blogDate;
-    }
-
-    public void setBlogDate(Date blogDate) {
-        this.blogDate = blogDate;
-    }*/
 }

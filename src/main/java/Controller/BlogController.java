@@ -1,16 +1,18 @@
 package Controller;
 
 
-
 import HelperDate.HelperDate;
 import Model.entity.Blog;
+import Model.entity.Category;
 import Model.service.BlogService;
+import Model.service.CategoryService;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.sql.Timestamp;
-import java.sql.Date;
+
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -21,11 +23,14 @@ public class BlogController {
     private BlogService blogService;
 
     @Autowired
+    CategoryService categoryService;
+
+    @Autowired
     HelperDate date;
 
     @RequestMapping(value = "/getAll.htm")
     public ModelAndView getAllProduct() {
-        ModelAndView mav = new ModelAndView("Blog");
+        ModelAndView mav = new ModelAndView("admin/blog/Blog");
         List<Blog> listBlog = blogService.finAll();
         mav.addObject("listBlog", listBlog);
         return mav;
@@ -33,10 +38,11 @@ public class BlogController {
 
     @RequestMapping(value = "initInsert.htm")
     public ModelAndView initInsertBlog() {
-        ModelAndView mav = new ModelAndView("Create");
+        ModelAndView mav = new ModelAndView("admin/blog/Create");
         Blog blogNew = new Blog();
+        List<Category> listCategory = categoryService.finAll();
+        mav.addObject("listCategory",listCategory);
         mav.addObject("blogNew", blogNew);
-        System.out.println(blogNew);
         return mav;
     }
 
@@ -52,9 +58,11 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/initUpdate.htm")
-    public ModelAndView initUpdateBlog(int blogId) { // lay tham so truyen tu tren request
-        ModelAndView mav = new ModelAndView("Update");
-        Blog blogUpdate = blogService.findByI(blogId);
+    public ModelAndView initUpdateBlog(Integer blogId) { // lay tham so truyen tu tren request
+        ModelAndView mav = new ModelAndView("admin/blog/Update");
+        Blog blogUpdate = blogService.findById(blogId);
+        List<Category> listCategory = categoryService.finAll();
+        mav.addObject("listCategory", listCategory);
         mav.addObject("blogUpdate", blogUpdate);
         return mav;
     }
@@ -76,7 +84,7 @@ public class BlogController {
         System.out.println(check);
         if (check) {
             return "redirect:getAll.htm";
-        }else {
+        } else {
             return "Error";
 
         }
@@ -85,8 +93,8 @@ public class BlogController {
 
     @RequestMapping(value = "/initShow.htm", method = RequestMethod.GET) //
     public ModelAndView showProduct(int blogId) {
-        ModelAndView mav = new ModelAndView("Show");
-        Blog showBlog = blogService.findByI(blogId);
+        ModelAndView mav = new ModelAndView("admin/blog/Show");
+        Blog showBlog = blogService.findById(blogId);
         mav.addObject("showBlog", showBlog);
         return mav;
     }

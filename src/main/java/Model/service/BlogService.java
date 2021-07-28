@@ -1,14 +1,33 @@
 package Model.service;
 
+import Model.Dao.BlogDAO;
 import Model.entity.Blog;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
-public interface BlogService {
-    public List<Blog> finAll();
-    public boolean save(Blog blog);
-    public boolean merge(Blog blog);
-    public boolean delete(int blogId);
-    public Blog findByI(int blogId);
+@org.springframework.stereotype.Service
+public class BlogService implements IService<Blog,Integer> {
+    @Autowired
+    private BlogDAO blogDAO;
 
+    public List<Blog> finAll() {
+        return blogDAO.finAll();
+    }
 
+    public boolean save(Blog blog) {
+        return blogDAO.save(blog);
+    }
+
+    public boolean merge(Blog blog) {
+        return blogDAO.merge(blog);
+    }
+
+    public boolean delete(Integer blogId) {
+        return blogDAO.delete(blogId);
+    }
+
+    public Blog findById(Integer blogId) {
+        return blogDAO.findById(blogId);
+    }
 }

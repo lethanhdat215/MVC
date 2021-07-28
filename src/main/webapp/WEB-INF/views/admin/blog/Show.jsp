@@ -17,6 +17,7 @@
    <h2>${showBlog.blogName}</h2>
     <p>${showBlog.blogText}</p>
     <p>${showBlog.blogDate}</p>
+    <p>${showBlog.category.categoryName}</p>
 </form:form>
 <a href="/blogController/getAll.htm"><button>Back Blog</button></a>
 </body>
