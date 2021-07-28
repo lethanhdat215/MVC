@@ -54,6 +54,6 @@
             </tr>
         </table>
     </form:form>
-    <a href="/blogController/getAll.htm"><button>Back Blog</button></a>
+    <a href="blogController/getAll.htm"><button>Back Blog</button></a>
 </body>
 </html>

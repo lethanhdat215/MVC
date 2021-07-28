@@ -21,7 +21,7 @@ public class Category {
 //    @Column(name = "id")
 //    private int blogId;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "category")
     private List<Blog> listBlog;
 
     public Category(int categoryId, String categoryName, int blogId, List<Blog> listBlog) {
