@@ -14,10 +14,10 @@
 <body>
     <form:form action="insert.htm" modelAttribute="categoryNew" method="post" >
         <table border="1">
-            <tr>
-                <td>Category ID</td>
-                <td><form:input path="categoryId"></form:input></td>
-            </tr>
+<%--            <tr>--%>
+<%--                <td>Category ID</td>--%>
+<%--                <td><form:hidden path="categoryId"></form:hidden></td>--%>
+<%--            </tr>--%>
             <tr>
                 <td>Category Name</td>
                 <td><form:input path="categoryName"></form:input></td>

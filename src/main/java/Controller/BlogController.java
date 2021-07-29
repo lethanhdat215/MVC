@@ -9,6 +9,7 @@ import Model.service.CategoryService;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,15 +27,15 @@ public class BlogController {
     CategoryService categoryService;
 
     @Autowired
-    HelperDate date;
+    HelperDate helperDate;
 
-    @RequestMapping(value = "/getAll.htm")
-    public ModelAndView getAllProduct() {
-        ModelAndView mav = new ModelAndView("admin/blog/Blog");
-        List<Blog> listBlog = blogService.finAll();
-        mav.addObject("listBlog", listBlog);
-        return mav;
-    }
+//    @RequestMapping(value = "/getAll.htm")
+//    public ModelAndView getAllProduct() {
+//        ModelAndView mav = new ModelAndView("admin/blog/Blog");
+//        List<Blog> listBlog = blogService.finAll();
+//        mav.addObject("listBlog", listBlog);
+//        return mav;
+//    }
 
     @RequestMapping(value = "initInsert.htm")
     public ModelAndView initInsertBlog() {
@@ -48,7 +49,7 @@ public class BlogController {
 
     @RequestMapping(value = "/insert.htm", method = RequestMethod.POST)
     String insertBlog(Blog blogNew) {
-        blogNew.setBlogDate(date.date());
+        blogNew.setBlogDate(helperDate.date());
         boolean check = blogService.save(blogNew);
         if (check) {
             return "redirect:getAll.htm";
@@ -69,7 +70,7 @@ public class BlogController {
 
     @RequestMapping(value = "/update.htm", method = RequestMethod.POST) // xu ly tham so truyen tu tren request
     public String updateBlog(Blog blogUpdate) {
-        blogUpdate.setBlogDate(date.date());
+        blogUpdate.setBlogDate(helperDate.date());
         boolean check = blogService.merge(blogUpdate);
         if (check) {
             return "redirect:getAll.htm";
@@ -97,6 +98,36 @@ public class BlogController {
         Blog showBlog = blogService.findById(blogId);
         mav.addObject("showBlog", showBlog);
         return mav;
+    }
+
+
+    @GetMapping(value = "/getAll.htm")
+    public String home(@RequestParam(name = "page", required = false) Integer page, Model model) {
+        int limit = 3;
+        int totalRecord = (int) blogService.countTotalRecords();
+        int endPage = totalRecord/limit;
+        if (endPage % limit != 0) {
+            endPage ++;
+        }
+        if (page == null) {
+            page = 1;
+        }
+        int position = (page - 1) *limit;
+        List<Blog> listBlog = blogService.getListBlog(position, limit);
+        model.addAttribute("end", endPage);
+        model.addAttribute("listBlog", listBlog);
+        model.addAttribute("page", page);
+        return "admin/blog/Blog";
+    }
+
+    @GetMapping(value = "/getAllByDate.htm")
+    public String getBlogByDate( Model model) {
+
+        List<Blog> listBlog = helperDate.finAllByDate();
+
+        model.addAttribute("listBlog", listBlog);
+
+        return "admin/blog/Blog";
     }
 
 }

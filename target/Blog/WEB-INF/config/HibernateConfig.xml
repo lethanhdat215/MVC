@@ -19,6 +19,7 @@
         <property name="dataSource" ref="myDataSource"/>
         <property name="packagesToScan" value="Model.entity"/>
         <property name="hibernateProperties">
+
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.Oracle8iDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>

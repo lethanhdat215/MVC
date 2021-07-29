@@ -88,4 +88,10 @@ public class CategoryDAO implements DAO<Category,Integer> {
         session.close();
         return category;
     }
+
+    public List<Category> getListBlog(Integer position, Integer limit) {
+        return null;
+    }
+
+
 }

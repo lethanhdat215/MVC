@@ -12,13 +12,19 @@ import java.util.Calendar;
 @Data // thay cho getter setter constructor
 @Table(name = "Blog")
 public class Blog {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+    @SequenceGenerator(name = "generator", sequenceName = "SEQUENCE_BLOG", allocationSize = 1)
     @Column(name = "id")
     private int blogId;
+
     @Column(name = "name")
     private String blogName;
+
     @Column(name = "context")
     private String blogText;
+
     @Column(name = "created")
     private Timestamp blogDate;
 //    @Column(name = "categoryId")

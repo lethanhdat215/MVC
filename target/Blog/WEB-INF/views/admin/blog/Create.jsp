@@ -17,10 +17,10 @@
 <body>
     <form:form action="insert.htm" modelAttribute="blogNew" method="post">
         <table border="1">
-            <tr>
-                <td>Blog ID</td>
-                <td><form:input path="blogId"></form:input></td>
-            </tr>
+<%--            <tr>--%>
+<%--                <td>Blog ID</td>--%>
+<%--                <td><form:hidden path="blogId"></form:hidden>   // hidden = an di blogId--%>   </td>
+<%--            </tr>--%>
             <tr>
                 <td>Blog Name</td>
                 <td><form:input path="blogName"></form:input></td>

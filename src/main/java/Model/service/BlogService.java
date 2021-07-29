@@ -11,6 +11,14 @@ public class BlogService implements IService<Blog,Integer> {
     @Autowired
     private BlogDAO blogDAO;
 
+    public int countTotalRecords(){
+        return blogDAO.countTotalRecords();
+    }
+
+    public List<Blog> getListBlog(int position, int limit) {
+        return blogDAO.getListBlog(position,limit);
+    }
+
     public List<Blog> finAll() {
         return blogDAO.finAll();
     }
