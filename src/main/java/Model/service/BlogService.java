@@ -2,6 +2,7 @@ package Model.service;
 
 import Model.Dao.BlogDAO;
 import Model.entity.Blog;
+import Model.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -38,4 +39,14 @@ public class BlogService implements IService<Blog,Integer> {
     public Blog findById(Integer blogId) {
         return blogDAO.findById(blogId);
     }
+
+    public List<Blog> finAllByName(String nameBlog) {
+        return blogDAO.finAllByName(nameBlog);
+    }
+
+    public List<Blog> finByCate(Category category) {
+        return blogDAO.finByCate(category);
+    }
+
+
 }

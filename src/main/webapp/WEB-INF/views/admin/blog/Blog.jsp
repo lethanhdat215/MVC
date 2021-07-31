@@ -42,15 +42,22 @@
     </style>
 </head>
 <body>
+
+<tr>
+    <th style="background: yellow">List Category : </th>
+    <c:forEach items="${listCategory}" var="cate">
+        <a href="showBlogByCate.htm?cateId=${cate.categoryId}"><button>${cate.categoryName} </button> </a>
+    </c:forEach>
+</tr>
+
 <table border="1">
     <thead>
     <th style="background: darkgreen">Blog Id</th>
-    <th style="background: red">Blog Name</th>
-    <th style="background: purple">Blog Text</th>
-    <th style="background: purple">Blog Date</th>
-    <th style="background: purple">Category Name</th>
-    <th style="background: yellow">Functions</th>
-    <th style="background: yellow">Category</th>
+    <th style="background: darkgreen">Blog Name</th>
+    <th style="background: darkgreen">Blog Text</th>
+    <th style="background: darkgreen">Blog Date</th>
+    <th style="background: darkgreen">Category Name</th>
+    <th style="background: darkgreen">Functions</th>
     </thead>
     <tbody>
     <c:forEach items="${listBlog}" var="blog">
@@ -71,11 +78,17 @@
 </table>
 <ul class="pagination" id="pagination">
     <c:forEach begin="1" end="${end}" var="i">
-        <li><a href="getAllByDate.htm?page=${i}" <c:if test="${page == i }"> class="is-active"</c:if>>${i}</a></li>
+        <li>
+            <a href="getAllByDate.htm?page=${i}" <c:if test="${page == i }"> class="is-active"</c:if>>${i}</a>
+        </li>
     </c:forEach>
 </ul>
 <a href="initInsert.htm"><button style="background: cornflowerblue">Creates Blog</button></a>
 
+<form action="initSearchByName.htm" method="get">
+    <input type="text" placeholder="Search.." name="blogName">
+    <input type="submit" value="search">
+</form>
 
 <%--<c:url var="loadStudentLink" value="createBlog.htm"/>--%>
 <%--<a href="${loadStudentLink}">Create</a>--%>

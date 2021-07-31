@@ -6,14 +6,12 @@ import Model.entity.Blog;
 import Model.entity.Category;
 import Model.service.BlogService;
 import Model.service.CategoryService;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -42,7 +40,7 @@ public class BlogController {
         ModelAndView mav = new ModelAndView("admin/blog/Create");
         Blog blogNew = new Blog();
         List<Category> listCategory = categoryService.finAll();
-        mav.addObject("listCategory",listCategory);
+        mav.addObject("listCategory", listCategory);
         mav.addObject("blogNew", blogNew);
         return mav;
     }
@@ -57,6 +55,7 @@ public class BlogController {
             return "Error";
         }
     }
+
 
     @RequestMapping(value = "/initUpdate.htm")
     public ModelAndView initUpdateBlog(Integer blogId) { // lay tham so truyen tu tren request
@@ -89,7 +88,6 @@ public class BlogController {
             return "Error";
 
         }
-
     }
 
     @RequestMapping(value = "/initShow.htm", method = RequestMethod.GET) //
@@ -100,20 +98,21 @@ public class BlogController {
         return mav;
     }
 
-
     @GetMapping(value = "/getAll.htm")
     public String home(@RequestParam(name = "page", required = false) Integer page, Model model) {
         int limit = 3;
         int totalRecord = (int) blogService.countTotalRecords();
-        int endPage = totalRecord/limit;
+        int endPage = totalRecord / limit;
         if (endPage % limit != 0) {
-            endPage ++;
+            endPage++;
         }
         if (page == null) {
             page = 1;
         }
-        int position = (page - 1) *limit;
+        int position = (page - 1) * limit;
         List<Blog> listBlog = blogService.getListBlog(position, limit);
+        List<Category> listCategory = categoryService.finAll();
+        model.addAttribute("listCategory",listCategory);
         model.addAttribute("end", endPage);
         model.addAttribute("listBlog", listBlog);
         model.addAttribute("page", page);
@@ -121,13 +120,29 @@ public class BlogController {
     }
 
     @GetMapping(value = "/getAllByDate.htm")
-    public String getBlogByDate( Model model) {
-
+    public String getBlogByDate(Model model) {
         List<Blog> listBlog = helperDate.finAllByDate();
-
         model.addAttribute("listBlog", listBlog);
-
         return "admin/blog/Blog";
     }
 
+
+    @RequestMapping(value = "/initSearchByName.htm")
+    public ModelAndView initSearchBlogByName(String blogName) {
+        ModelAndView mav = new ModelAndView("admin/blog/Search");
+        List<Blog> listBlogName = blogService.finAllByName(blogName);
+        System.out.println(blogName);
+        mav.addObject("lisBlogName", listBlogName);
+        System.out.println(listBlogName.size());
+        return mav;
+    }
+
+
+    @RequestMapping(value = "/showBlogByCate.htm", method = RequestMethod.GET) //
+    public String showProductBike(Model model , @RequestParam(name = "cateId") Integer cateId) {
+        Category cate = categoryService.findById(cateId);
+        List<Blog> listBlog = blogService.finByCate(cate);
+        model.addAttribute("listBlog",listBlog);
+        return "admin/blog/Bike";
+    }
 }

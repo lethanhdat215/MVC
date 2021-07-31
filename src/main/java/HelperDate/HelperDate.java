@@ -3,6 +3,8 @@ package HelperDate;
 
 
 import Model.entity.Blog;
+import Model.entity.Category;
+import com.sun.org.apache.xpath.internal.objects.XString;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -36,10 +38,7 @@ public class HelperDate { // trả về một chuỗi 17-07-2006
         session.getTransaction().commit();
         session.close();
         return listBlog;
-
     }
-
-
 }
 
 

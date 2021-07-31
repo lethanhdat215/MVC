@@ -32,4 +32,12 @@ public class CategoryService implements  IService <Category,Integer>{
     public Category findById(Integer categoryId) {
         return categoryDAO.findById(categoryId);
     }
+
+    public List<Category> finAllByName(String nameBlog) {
+        return categoryDAO.finAllByName(nameBlog);
+    }
+
+    public List<Category> finByCate(Category category) {
+        return null;
+    }
 }

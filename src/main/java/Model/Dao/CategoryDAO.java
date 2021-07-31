@@ -89,6 +89,17 @@ public class CategoryDAO implements DAO<Category,Integer> {
         return category;
     }
 
+
+
+    public List<Category> finAllByName(String nameBlog) {
+
+        return null;
+    }
+
+    public List<Category> finByCate(Category category) {
+        return null;
+    }
+
     public List<Category> getListBlog(Integer position, Integer limit) {
         return null;
     }

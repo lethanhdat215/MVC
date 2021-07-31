@@ -1,6 +1,7 @@
 package Model.Dao;
 
 import Model.entity.Blog;
+import Model.entity.Category;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -29,6 +30,8 @@ public class BlogDAO implements DAO<Blog, Integer> {
         session.close();
         return listBlog;
     }
+
+
 
 
     public boolean save(Blog blog) {
@@ -65,6 +68,16 @@ public class BlogDAO implements DAO<Blog, Integer> {
         return check;
     }
 
+
+    public Blog findById(Integer blogId) {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        Blog blog = (Blog) session.createQuery("from Blog where blogId = :blogId").setParameter("blogId", blogId).uniqueResult();
+        session.getTransaction().commit();
+        session.close();
+        return blog;
+    }
+
     public boolean delete(Integer blogId) {
         Session session = null;
         boolean check = false;
@@ -87,15 +100,15 @@ public class BlogDAO implements DAO<Blog, Integer> {
     }
 
 
-    public Blog findById(Integer blogId) {
+
+    public List<Blog> finByCate(Category category) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        Blog blog = (Blog) session.createQuery("from Blog where blogId = :blogId").setParameter("blogId", blogId).uniqueResult();
+        List<Blog> listBlog = session.createQuery("from Blog where category = :cate").setParameter("cate", category).list();
         session.getTransaction().commit();
         session.close();
-        return blog;
+        return listBlog;
     }
-
    /* public Long countTotalRecords() {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -128,6 +141,15 @@ public class BlogDAO implements DAO<Blog, Integer> {
         session.getTransaction().commit();
         session.close();
         return listBlog;
+    }
+
+    public List<Blog> finAllByName(String blogName) {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();//SELECT id, name, form_id, DATE(updated_at) as date
+        List<Blog> searchListBlog = session.createQuery("from Blog where blogName like :blogName").setParameter("blogName", "%"+blogName+"%").list();
+        session.getTransaction().commit();
+        session.close();
+        return searchListBlog;
     }
 }
 
